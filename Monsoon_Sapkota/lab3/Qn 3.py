@@ -1,0 +1,63 @@
+import matplotlib.pyplot as plt
+
+
+def plot_circle_points(xc, yc, x, y, xes, yes):
+    pts = [
+        ( x + xc,  y + yc),
+        (-x + xc,  y + yc),
+        ( x + xc, -y + yc),
+        (-x + xc, -y + yc),
+        ( y + xc,  x + yc),
+        (-y + xc,  x + yc),
+        ( y + xc, -x + yc),
+        (-y + xc, -x + yc),
+    ]
+
+    for px, py in pts:
+        xes.append(px)
+        yes.append(py)
+
+
+def midpoint_circle(r, xc, yc):
+    x = 0
+    y = r
+    p = 1 - r
+
+    xes = []
+    yes = []
+
+    plot_circle_points(xc, yc, x, y, xes, yes)
+
+    while x < y:
+        x += 1
+
+        if p < 0:
+            p = p + 2 * x + 1
+        else:
+            y -= 1
+            p = p + 2 * x - 2 * y + 1
+
+        plot_circle_points(xc, yc, x, y, xes, yes)
+
+    return xes, yes
+
+
+# -------- Main Program --------
+if __name__ == "__main__":
+
+    xc, yc = 0, 0          # common center
+    radii = [20, 40, 60, 80, 100]   # different radii
+
+    plt.figure()
+
+    for r in radii:
+        xes, yes = midpoint_circle(r, xc, yc)
+        plt.scatter(xes, yes, s=10, label=f"r={r}")
+
+    plt.gca().set_aspect('equal', adjustable='box')
+    plt.title("Concentric Circles (Target Pattern) using Midpoint Algorithm")
+    plt.xlabel("X-axis")
+    plt.ylabel("Y-axis")
+    plt.grid(True)
+    plt.legend()
+    plt.show()
