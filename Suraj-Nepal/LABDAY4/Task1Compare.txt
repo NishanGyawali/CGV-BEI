@@ -1,0 +1,74 @@
+It is the Output in Console, Since It's too large to take so i have used the consle output in this .txt file
+POINT SPACING COMPARISON - REGION 1 vs REGION 2
+================================================================================
+
+Ellipse Parameters: rx=30, ry=15, center=(0, 0)
+Total Points: 36
+Region 1 Points: 29, Region 2 Points: 7
+Region 1 Spacings: 28, Region 2 Spacings: 6
+
+--------------------------------------------------------------------------------
+REGION 1 ANALYSIS
+--------------------------------------------------------------------------------
+Number of Points: 29
+Number of Spacings: 28
+Average Spacing: 1.1331
+Maximum Spacing: 1.4142
+Minimum Spacing: 1.0000
+Standard Deviation: 0.1934
+
+Region 1 Spacing Values:
+  Point 1 to 2: 1.0000
+  Point 2 to 3: 1.0000
+  Point 3 to 4: 1.0000
+  Point 4 to 5: 1.0000
+  Point 5 to 6: 1.0000
+  Point 6 to 7: 1.0000
+  Point 7 to 8: 1.0000
+  Point 8 to 9: 1.4142
+  Point 9 to 10: 1.0000
+  Point 10 to 11: 1.0000
+  Point 11 to 12: 1.0000
+  Point 12 to 13: 1.0000
+  Point 13 to 14: 1.0000
+  Point 14 to 15: 1.4142
+  Point 15 to 16: 1.0000
+  Point 16 to 17: 1.0000
+  Point 17 to 18: 1.4142
+  Point 18 to 19: 1.0000
+  Point 19 to 20: 1.0000
+  Point 20 to 21: 1.4142
+  Point 21 to 22: 1.0000
+  Point 22 to 23: 1.4142
+  Point 23 to 24: 1.0000
+  Point 24 to 25: 1.4142
+  Point 25 to 26: 1.4142
+  Point 26 to 27: 1.4142
+  Point 27 to 28: 1.0000
+  Point 28 to 29: 1.4142
+
+--------------------------------------------------------------------------------    
+REGION 2 ANALYSIS
+--------------------------------------------------------------------------------    
+Number of Points: 7
+Number of Spacings: 6
+Average Spacing: 1.1381
+Maximum Spacing: 1.4142
+Minimum Spacing: 1.0000
+Standard Deviation: 0.1953
+
+Region 2 Spacing Values:
+  Point 1 to 2: 1.4142
+  Point 2 to 3: 1.4142
+  Point 3 to 4: 1.0000
+  Point 4 to 5: 1.0000
+  Point 5 to 6: 1.0000
+  Point 6 to 7: 1.0000
+
+--------------------------------------------------------------------------------    
+COMPARISON SUMMARY
+--------------------------------------------------------------------------------    
+Average Spacing Ratio (Region 1 / Region 2): 0.9957
+  -> Region 2 has 1.00x larger average spacing than Region 1
+Difference in Average Spacing: 0.0049
+================================================================================   
