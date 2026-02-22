@@ -1,13 +1,12 @@
-
 { pkgs ? import <nixpkgs> {} }:
 
 pkgs.mkShell {
   packages = [
-    pkgs.python311
-    pkgs.python311Packages.venvShellHook
-    pkgs.python311Packages.pyqt5
-    pkgs.python311Packages.matplotlib
-    pkgs.python311Packages.numpy
+    pkgs.python314
+    pkgs.python314Packages.venvShellHook
+    pkgs.python314Packages.pyqt6
+    pkgs.python314Packages.matplotlib
+    pkgs.python314Packages.numpy
 
     # C++ runtime
     pkgs.gcc.cc.lib
@@ -27,12 +26,10 @@ pkgs.mkShell {
     pkgs.xorg.libXinerama
     pkgs.xorg.libXi
     pkgs.libxcb
-    pkgs.qt6.qtbase
-    pkgs.qt6.qtwayland
-
     # Audio (optional)
     pkgs.alsa-lib
     pkgs.pulseaudio
+    pkgs.openal
     pkgs.openal
   ];
 

@@ -1,0 +1,111 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ---------------- DDA Algorithm ----------------
+def DDA(x1, y1, x2, y2):
+    x_points = []
+    y_points = []
+
+    dx = x2 - x1
+    dy = y2 - y1
+
+    steps = int(max(abs(dx), abs(dy)))
+
+    if steps == 0:
+        return np.array([x1]), np.array([y1]), 0
+
+    x_inc = dx / steps
+    y_inc = dy / steps
+
+    x = x1
+    y = y1
+
+    for i in range(steps + 1):
+        x_points.append(round(x))
+        y_points.append(round(y))
+        x += x_inc
+        y += y_inc
+
+    return np.array(x_points), np.array(y_points), steps
+
+
+# ---------------- Transformation ----------------
+def apply_transformation(x1, y1, x2, y2, tx, ty, theta):
+    # Convert angle to radians
+    theta_rad = np.radians(theta)
+
+    # Translation matrix
+    T = np.array([
+        [1, 0, tx],
+        [0, 1, ty],
+        [0, 0, 1]
+    ])
+
+    # Rotation matrix
+    R = np.array([
+        [np.cos(theta_rad), -np.sin(theta_rad), 0],
+        [np.sin(theta_rad),  np.cos(theta_rad), 0],
+        [0, 0, 1]
+    ])
+
+    # Original points (homogeneous form)
+    p1 = np.array([[x1], [y1], [1]])
+    p2 = np.array([[x2], [y2], [1]])
+
+    # Apply Translation then Rotation
+    p1_new = R @ T @ p1
+    p2_new = R @ T @ p2
+
+    return p1_new[0][0], p1_new[1][0], p2_new[0][0], p2_new[1][0]
+
+
+# ---------------- Main Program ----------------
+def main():
+    print("------ DDA Line with Transformation ------")
+
+    # Input original points
+    x1 = int(input("Enter Starting X: "))
+    y1 = int(input("Enter Starting Y: "))
+
+    x2 = int(input("Enter Ending X: "))
+    y2 = int(input("Enter Ending Y: "))
+
+    # Input transformation
+    tx = float(input("Enter Translation TX: "))
+    ty = float(input("Enter Translation TY: "))
+    theta = float(input("Enter Rotation Angle (degrees): "))
+
+    # Original line
+    x_orig, y_orig, steps_orig = DDA(x1, y1, x2, y2)
+
+    # Transformed line
+    x1_t, y1_t, x2_t, y2_t = apply_transformation(x1, y1, x2, y2, tx, ty, theta)
+    x_trans, y_trans, steps_trans = DDA(x1_t, y1_t, x2_t, y2_t)
+
+    # Print values
+    print("\nOriginal Line Points:")
+    print("X:", x_orig)
+    print("Y:", y_orig)
+
+    print("\nTransformed Line Points:")
+    print("X:", x_trans)
+    print("Y:", y_trans)
+
+    # Plotting
+    plt.figure()
+    plt.plot(x_orig, y_orig, marker='o', label="Original Line")
+    plt.plot(x_trans, y_trans, marker='o', label="Transformed Line")
+
+    plt.title("DDA Line Drawing with Transformation")
+    plt.xlabel("X-axis")
+    plt.ylabel("Y-axis")
+    plt.legend()
+    plt.grid(True)
+    plt.axis('equal')   # important for correct shape
+
+    plt.savefig("DDA_transformed.png")
+    plt.show()   # VERY IMPORTANT
+
+
+if __name__ == "__main__":
+    main()
