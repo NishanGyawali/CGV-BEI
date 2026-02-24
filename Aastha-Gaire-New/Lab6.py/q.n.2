@@ -1,0 +1,32 @@
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Original line endpoints
+x1, y1 = 2, 2
+x2, y2 = 8, 6
+
+# Scaling factors
+sx, sy = 2, 1.5
+
+# Midpoint
+xm = (x1 + x2) / 2
+ym = (y1 + y2) / 2
+
+# Scale both endpoints about midpoint
+x1_new = xm + sx * (x1 - xm)
+y1_new = ym + sy * (y1 - ym)
+
+x2_new = xm + sx * (x2 - xm)
+y2_new = ym + sy * (y2 - ym)
+
+# Plot
+plt.plot([x1, x2], [y1, y2], 'bo-', label="Original Line")
+plt.plot([x1_new, x2_new], [y1_new, y2_new], 'ro-', label="Scaled About Midpoint")
+
+plt.title("Scaling About Midpoint")
+plt.legend()
+plt.grid(True)
+plt.gca().set_aspect('equal')
+plt.show()

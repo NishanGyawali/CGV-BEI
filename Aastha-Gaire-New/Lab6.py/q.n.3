@@ -1,0 +1,37 @@
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+# Original line endpoints
+x1, y1 = 2, 2
+x2, y2 = 8, 6
+
+# Rotation angle in degrees
+theta = 45
+rad = math.radians(theta)
+
+# Rotation matrix
+R = np.array([[math.cos(rad), -math.sin(rad)],
+              [math.sin(rad),  math.cos(rad)]])
+
+# Original points
+P1 = np.array([x1, y1])
+P2 = np.array([x2, y2])
+
+# Apply rotation
+P1_new = R @ P1
+P2_new = R @ P2
+
+# Plot
+plt.plot([x1, x2], [y1, y2], 'bo-', label="Original Line")
+plt.plot([P1_new[0], P2_new[0]],
+         [P1_new[1], P2_new[1]],
+         'ro-', label="Rotated Line (45°)")
+
+plt.title("Rotation About Origin")
+plt.legend()
+plt.grid(True)
+plt.gca().set_aspect('equal')
+plt.show()
