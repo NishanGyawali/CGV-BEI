@@ -45,16 +45,15 @@ def bresenham(x1, y1, x2, y2):
     return points
 
 
-# -------- TEST LINES IN DIFFERENT OCTANTS --------
 lines = [
-    (0, 0, 8, 3),    # Octant 1
-    (0, 0, 3, 8),    # Octant 2
-    (0, 0, -3, 8),   # Octant 3
-    (0, 0, -8, 3),   # Octant 4
-    (0, 0, -8, -3),  # Octant 5
-    (0, 0, -3, -8),  # Octant 6
-    (0, 0, 3, -8),   # Octant 7
-    (0, 0, 8, -3)    # Octant 8
+    (0, 0, 8, 3),   
+    (0, 0, 3, 8),    
+    (0, 0, -3, 8),  
+    (0, 0, -8, 3),  
+    (0, 0, -8, -3),  
+    (0, 0, -3, -8),  
+    (0, 0, 3, -8),   
+    (0, 0, 8, -3)    
 ]
 
 plt.figure()

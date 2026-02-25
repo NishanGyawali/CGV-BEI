@@ -44,7 +44,6 @@ def midpoint_ellipse(rx, ry, xc, yc):
 
     return xes, yes
 
-# -------- Beautiful Ellipses --------
 ellipses = [
     (10, 5, 0, 0),      # Small ellipse at center
     (30, 15, 0, 0),     # Big ellipse around it

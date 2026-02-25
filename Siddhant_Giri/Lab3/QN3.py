@@ -31,8 +31,8 @@ def midpoint_circle(xc, yc, r):
 
 
 # -------- DRAW CONCENTRIC CIRCLES --------
-xc, yc = 0, 0          # common center
-radii = [3, 6, 9, 12, 15]   # multiple radii (target pattern)
+xc, yc = 0, 0        
+radii = [3, 6, 9, 12, 15]   
 
 plt.figure()
 
