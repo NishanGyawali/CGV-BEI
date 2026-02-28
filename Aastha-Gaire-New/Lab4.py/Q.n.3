@@ -1,0 +1,18 @@
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+# Draw concentric circles
+radius = 1
+for i in range(5):
+    circle = plt.Circle((0, 0), radius, fill=False)
+    ax.add_patch(circle)
+    radius += 1
+
+ax.set_aspect('equal')
+ax.set_xlim(-6, 6)
+ax.set_ylim(-6, 6)
+
+plt.title("Concentric Circles (Target Pattern)")
+plt.grid(True)
+plt.show()
