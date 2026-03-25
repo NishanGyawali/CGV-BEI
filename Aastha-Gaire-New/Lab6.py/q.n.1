@@ -1,0 +1,28 @@
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Original line endpoints
+x1, y1 = 2, 2
+x2, y2 = 8, 6
+
+# Scaling factors
+sx, sy = 2, 1.5
+
+# Fixed point (starting point)
+xf, yf = x1, y1
+
+# Apply scaling
+x2_new = xf + sx * (x2 - xf)
+y2_new = yf + sy * (y2 - yf)
+
+# Plot
+plt.plot([x1, x2], [y1, y2], 'bo-', label="Original Line")
+plt.plot([x1, x2_new], [y1, y2_new], 'ro-', label="Scaled Line")
+
+plt.title("Scaling About Starting Point")
+plt.legend()
+plt.grid(True)
+plt.gca().set_aspect('equal')
+plt.show()

@@ -1,0 +1,68 @@
+# Program 1: Midpoint Ellipse Algorithm using Matplotlib
+
+import matplotlib.pyplot as plt
+
+def midpoint_ellipse(rx, ry, xc, yc):
+    x = 0
+    y = ry
+
+    # Decision parameters
+    p1 = ry**2 - rx**2 * ry + 0.25 * rx**2
+
+    points_x = []
+    points_y = []
+
+    # -------- Region 1 --------
+    dx = 2 * ry**2 * x
+    dy = 2 * rx**2 * y
+
+    while dx < dy:
+        # Store symmetric points
+        points_x += [xc + x, xc - x, xc + x, xc - x]
+        points_y += [yc + y, yc + y, yc - y, yc - y]
+
+        if p1 < 0:
+            x += 1
+            dx = 2 * ry**2 * x
+            p1 += dx + ry**2
+        else:
+            x += 1
+            y -= 1
+            dx = 2 * ry**2 * x
+            dy = 2 * rx**2 * y
+            p1 += dx - dy + ry**2
+
+    # -------- Region 2 --------
+    p2 = (ry**2) * (x + 0.5)**2 + (rx**2) * (y - 1)**2 - (rx**2 * ry**2)
+
+    while y >= 0:
+        points_x += [xc + x, xc - x, xc + x, xc - x]
+        points_y += [yc + y, yc + y, yc - y, yc - y]
+
+        if p2 > 0:
+            y -= 1
+            dy = 2 * rx**2 * y
+            p2 += rx**2 - dy
+        else:
+            y -= 1
+            x += 1
+            dx = 2 * ry**2 * x
+            dy = 2 * rx**2 * y
+            p2 += dx - dy + rx**2
+
+    return points_x, points_y
+
+
+# Example ellipse
+rx = 6
+ry = 4
+xc = 0
+yc = 0
+
+x_pts, y_pts = midpoint_ellipse(rx, ry, xc, yc)
+
+plt.scatter(x_pts, y_pts, s=10)
+plt.gca().set_aspect('equal')
+plt.title("Midpoint Ellipse Algorithm")
+plt.grid(True)
+plt.show()

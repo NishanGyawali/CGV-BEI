@@ -1,0 +1,50 @@
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+st.set_page_config(page_title="Iris Dashboard", layout="wide")
+
+# 1. Header with Image
+st.title("🌸 Iris Flower Species Dashboard")
+st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Iris_versicolor_3.jpg/800px-Iris_versicolor_3.jpg", width=400)
+
+# 2. Load Data
+@st.cache_data
+def load_data():
+    return pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+
+df = load_data()
+
+# 3. Sidebar Controls
+st.sidebar.header("Controls")
+chart_type = st.sidebar.selectbox("Select Chart Type", ["Scatter", "Line", "Histogram"])
+x_axis = st.sidebar.selectbox("X-axis", df.columns[:-1], index=2) 
+y_axis = st.sidebar.selectbox("Y-axis", df.columns[:-1], index=3)
+
+# 4. Filter Logic
+all_species = df['species'].unique()
+selected_species = st.sidebar.multiselect("Filter Species", all_species, default=all_species)
+filtered_df = df[df['species'].isin(selected_species)]
+
+# 5. Main Graph Area
+st.subheader(f"{chart_type} Chart: {x_axis} vs {y_axis}")
+fig, ax = plt.subplots(figsize=(10, 5))
+
+if chart_type == "Scatter":
+    # ADDED 'hue' HERE - This creates the colorful "flower" clusters
+    sns.scatterplot(data=filtered_df, x=x_axis, y=y_axis, hue="species", palette="bright", ax=ax)
+
+elif chart_type == "Line":
+    # This sorts data so the line moves smoothly left to right
+    sorted_df = filtered_df.sort_values(by=x_axis)
+    ax.plot(sorted_df[x_axis], sorted_df[y_axis], marker='o', alpha=0.5)
+
+elif chart_type == "Histogram":
+    sns.histplot(data=filtered_df, x=x_axis, hue="species", kde=True, ax=ax)
+
+st.pyplot(fig)
+
+# 6. Data Table
+st.write("### Filtered Data Table", filtered_df)
+# Final project submission

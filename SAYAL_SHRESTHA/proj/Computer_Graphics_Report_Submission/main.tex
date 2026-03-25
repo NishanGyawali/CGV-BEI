@@ -1,0 +1,413 @@
+% ==========================================================
+% SAMPLE REPORT (COMPUTER GRAPHICS) — SAME TEMPLATE STRUCTURE
+% ==========================================================
+% NOTE:
+% 1) This is a “sample content” report that fits your template layout.
+% 2) It assumes you have these files:
+%    - includes/coverpage.tex
+%    - includes/copyright.tex
+%    - includes/acknowledgemt.tex
+%    - includes/abstract.tex
+%    - includes/acronyms.tex
+%    - includes/ref.bib
+%    - images/ (with some sample images)
+%
+% 3) If you compile with minted, use:
+%    pdflatex -shell-escape main.tex
+% ==========================================================
+
+\documentclass[a4paper, 12pt]{report}
+
+%---PREAMBLE BEGINS HERE---
+
+\usepackage{graphicx}
+\usepackage[a4paper]{geometry}
+\usepackage{titlesec}
+\usepackage{minted}
+\usepackage{amsmath, amsthm, amsfonts}
+\usepackage{mathptmx}
+\usepackage[skip=18pt, indent=40pt]{parskip}
+\usepackage{setspace}
+\usepackage[acronym, nomain, section=section]{glossaries}
+\usepackage{glossaries-extra}
+\usepackage[nottoc]{tocbibind}
+\usepackage{ifthen}
+\usepackage{tocloft}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlist[enumerate]{noitemsep, topsep=0pt}
+
+% Creating new style acronyms for tabulating acronyms
+\newglossarystyle{acronyms}{%
+  \renewenvironment{theglossary}{\begin{tabular}{ll}}{\end{tabular}}%
+  \renewcommand*{\glossaryheader}{}%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand*{\glossentry}[2]{\glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}} & \glossentrydesc{##1}\tabularnewline}%
+  \renewcommand*{\subglossentry}[3]{\glstarget{##2}{\glossentryname{##2}} & \glossentrydesc{##2}\tabularnewline}%
+  \renewcommand*{\glsgroupskip}{}%
+}
+\makeglossaries
+
+% defining the page margins
+\newgeometry{
+    top=1in,
+    bottom=1in,
+    inner=1.5in,
+    outer=1in,
+}
+
+% defining variables, DO CHANGE THIS BEFORE COMPILE
+\newcommand{\projectTitle}{Computer Graphics Mini Project Report}
+\newcommand{\projectDate}{February, 2026}
+\newcommand{\projectAuthor}{Seven Shades}
+
+% Paragraph formating for heading and normal paragraphs
+\titleformat{\chapter}
+   {\fontsize{12pt}{12pt}\bfseries\uppercase}{\thechapter.}{1em}{}[\vspace{-\parskip}]
+\titlespacing*{\chapter}{0pt}{0pt}{12pt}
+
+\titleformat{\section}
+   {\fontsize{12pt}{12pt}\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{18pt}{10pt}
+
+\titleformat{\subsection}
+   {\fontsize{12pt}{12pt}\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{18pt}{8pt}
+
+\titleformat{\subsubsection}
+   {\fontsize{12pt}{12pt}\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{0pt}{6pt}
+\setcounter{secnumdepth}{3}
+
+% Customizing chapter section in Table of Contents
+\renewcommand{\cftfigpresnum}{Figure\ }
+\setlength{\cftfignumwidth}{5em}
+
+\renewcommand{\cfttabpresnum}{Table\ }
+\setlength{\cfttabnumwidth}{4.5em}
+
+\renewcommand{\contentsname}{Table of Contents}
+\setlength{\cftbeforechapskip}{6pt}
+\renewcommand{\cftchapaftersnum}{.}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchapfont}{\bfseries}
+
+\renewcommand{\cfttoctitlefont}{\fontsize{12pt}{12pt}\bfseries}
+\setlength{\cftbeforetoctitleskip}{0pt}
+\setlength{\cftaftertoctitleskip}{12pt}
+
+\renewcommand{\cftloftitlefont}{\fontsize{12pt}{12pt}\bfseries}
+\setlength{\cftbeforeloftitleskip}{20pt}
+\setlength{\cftafterloftitleskip}{20pt}
+
+\renewcommand{\cftlottitlefont}{\fontsize{12pt}{12pt}\bfseries}
+\setlength{\cftbeforelottitleskip}{20pt}
+\setlength{\cftafterlottitleskip}{20pt}
+
+\hypersetup{
+  pdfauthor={\projectAuthor},
+  pdftitle={\projectTitle}
+}
+
+\title{\projectTitle}
+\author{\projectAuthor}
+\date{\projectDate}
+
+\doublespacing
+
+%---PREAMBLE ENDS HERE---
+\begin{document}
+
+\include{includes/acronyms}
+
+%---MAIN DOCUMENT BEGINS HERE---
+
+\include{includes/coverpage}
+
+\onehalfspacing
+
+\pagenumbering{roman}
+\pagestyle{plain}
+
+\include{includes/copyright}
+\include{includes/acknowledgemt}
+\include{includes/abstract}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+\listoftables
+\newpage
+
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\printglossary[type=acronym,style=acronyms]
+\newpage
+
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+% ==========================================================
+% CHAPTER 1: INTRODUCTION
+% ==========================================================
+\chapter{Introduction}
+
+Computer Graphics (CG) focuses on creating, manipulating, and displaying visual content using computers. Modern CG systems rely on mathematical models of geometry, lighting, and imaging to convert a 3D scene into a 2D image. This report presents a mini project titled \textbf{Interactive Visualization and Learning of Bezier Curves Using Python}, which demonstrates core CG concepts such as interactive visualization of complex number
+transformations and Bezier curves using Python..
+
+\section{Background Introduction}
+Bézier curves are defined using Bernstein polynomials and are widely used in CAD, animation, and UI rendering.
+A Bézier curve of degree $n$ is defined as:
+\[
+P(t) = \sum_{k=0}^{n} \binom{n}{k} t^k (1-t)^{n-k} P_k
+\]
+Complex numbers provide a natural way to represent 2D rotation and scaling:
+\[
+z = r e^{i\theta}
+\]
+\section{Motivation}
+Many students understand formulas theoretically but struggle to visualize their geometric meaning. The motivation behind this project is:
+\begin{itemize}
+    \item To convert mathematical exercise questions into interactive visual demonstrations
+    \item To build geometric intuition
+    \item To combine learning and interactivity
+    \item To create a modular and expandable CG system
+\end{itemize}
+
+\section{Objectives}
+The main objectives of the project are listed below:
+\begin{itemize}
+    \item Implement interactive visualization of complex number transformations
+    \item Implement 2D Bézier curves using De Casteljau algorithm
+    \item Implement 3D Bézier curves using Bernstein basis
+    \item Display parametric equations of Bézier curves
+    \item Integrate quiz-based conceptual validation
+    \item Create a modular UI system to launch different modules
+\end{itemize}
+
+\section{Scope}
+This project covers fundamental CG concepts used in 2D rendering:
+\begin{itemize}
+    \item 2D complex plane transformations
+    \item Parametric curve generation
+    \item Interactive sliders and control point dragging
+    \item Real-time graphical updates
+    \item 3D curve plotting
+    \item Educational MCQ-based reinforcement
+\end{itemize}
+It does not include a full exam oriented mcqs, procedural derivation, or GPU based rendering. Those are suggested as future enhancements.
+
+% ==========================================================
+% CHAPTER 2: LITERATURE REVIEW
+% ==========================================================
+\chapter{Literature Review}
+
+\section{Complex Numbers}
+Multiplying a complex number by $e^{i\theta}$ rotates it by angle $\theta$. Multiplying by $r$ scales its magnitude. This provides an elegant method for 2D geometric transformations without explicitly using matrices.
+
+\section{Bézier curves}
+Bézier curves were introduced by Pierre Bézier for automobile body design. They are based on Bernstein polynomials and provide smooth parametric curves controlled by a set of control points.
+Two major approaches exist for computing Bézier curves:
+    \item Bernstein Polynomial Formulation
+    \item De Casteljau Recursive Interpolation Algorithm
+De Casteljau’s algorithm is numerically stable and geometrically intuitive.
+A Bézier curve of degree $n$ is defined using Bernstein basis polynomials:
+\[
+B_{k,n}(t) = \binom{n}{k} t^k (1 - t)^{n-k}
+\]
+The general Bézier curve equation is:
+\[
+P(t) = \sum_{k=0}^{n} B_{k,n}(t) P_k
+\]
+% ==========================================================
+% CHAPTER 3: METHODOLOGY
+% ==========================================================
+\chapter{Methodology}
+
+\section{System Overview}
+
+The project consists of four main modules:
+
+\begin{itemize}
+    \item \textbf{UI Module (ui.py)} – Tkinter-based launcher that scans and executes project files.
+    \item \textbf{Complex Transformation Module (pre.py)} – Visualizes rotation and scaling in the complex plane.
+    \item \textbf{2D Bézier Module (bezier.py)} – Implements De Casteljau algorithm with draggable control points.
+    \item \textbf{3D Bézier Solver (bezierSolve.py)} – Computes Bernstein polynomial form and generates parametric equations.
+\end{itemize}
+
+\section{Mathematical Foundation}
+
+\subsection{De Casteljau Algorithm}
+
+Recursive interpolation formula:
+
+\[
+P_i^k = (1 - t)P_i^{k-1} + tP_{i+1}^{k-1}
+\]
+
+Repeated until a single point remains.
+
+\subsection{Bernstein Polynomial Basis}
+
+\[
+B_{k,n}(t) = \binom{n}{k} t^k (1 - t)^{n-k}
+\]
+
+\[
+P(t) = \sum_{k=0}^{n} B_{k,n}(t) P_k
+\]
+
+\subsection{Complex Rotation}
+
+If $z = x + iy$, then multiplying by $i$ rotates the vector by 90 degrees counterclockwise.
+
+\section{Algorithms Used}
+
+\subsection{De Casteljau Algorithm}
+Implemented in \texttt{bezier.py} for 2D curve construction.
+
+\subsection{Bernstein Polynomial Evaluation}
+Implemented in \texttt{bezierSolve.py} for 3D parametric generation.
+
+\subsection{Interactive Event Handling}
+Mouse drag events update control points dynamically.
+
+\subsection{Slider-Based Parameter Control}
+Parameter $t$ varies from 0 to 1 to trace the curve.
+
+\section{Implementation Snippet}
+
+\begin{minted}[fontsize=\small, linenos]{python}
+def bezier_parametric_eq(points):
+    n = len(points) - 1
+    x_eq = " + ".join([f"{comb(n,k)}*{points[k,0]}*t**{k}*(1-t)**{n-k}" for k in range(n+1)])
+    y_eq = " + ".join([f"{comb(n,k)}*{points[k,1]}*t**{k}*(1-t)**{n-k}" for k in range(n+1)])
+    z_eq = " + ".join([f"{comb(n,k)}*{points[k,2]}*t**{k}*(1-t)**{n-k}" for k in range(n+1)])
+    return x_eq, y_eq, z_eq
+
+
+x_eq, y_eq, z_eq = bezier_parametric_eq(control_points)
+
+print("\nParametric equations (Bernstein form):")
+print(f"x(t) = {x_eq}")
+print(f"y(t) = {y_eq}")
+print(f"z(t) = {z_eq}")
+\end{minted}
+\section{Sample Table}
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Control Points} & \textbf{Degree} & \textbf{Curve Type} \\
+\hline
+2 & 1 & Linear \\
+3 & 2 & Quadratic \\
+4 & 3 & Cubic \\
+5 & 4 & Quartic \\
+\hline
+\end{tabular}
+\caption{Relationship between control points and curve degree}
+\end{table}
+\newpage
+\section{Screenshots / Figures}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/ui_launcher.png}
+    \caption{Main UI Launcher (ui.py)}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/bezier2d.png}
+    \caption{2D Bézier Curve with Control Points}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/bezier3d.png}
+    \caption{3D Bézier Curve Visualization}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/pre.png}
+    \caption{Interactive Prerequisite with Mcq}
+\end{figure}
+% ==========================================================
+% CHAPTER 4: RESULT AND ANALYSIS
+% ==========================================================
+\chapter{Result and Analysis}
+
+\section{Correctness of Rendering Output}
+The Bézier curves pass through the first and last control points as expected. The curve remains inside the convex hull of the control polygon, validating correctness.
+The 3D visualization correctly follows the parametric equations generated.
+
+\section{Transformation Behavior}
+In \texttt{pre.py}:
+\begin{itemize}
+    \item Stretch slider changes magnitude only.
+    \item Turn slider changes angle only.
+    \item Four successive multiplications by $i$ return to original orientation.
+\end{itemize}
+In \texttt{bezier.py}:
+\begin{itemize}
+    \item Increasing control points increases curve flexibility.
+    \item Parameter $t$ smoothly traces the curve.
+\end{itemize}
+\section{Performance Discussion}
+The system runs smoothly for up to 8 control points in real time. Slider updates and drag events are responsive due to efficient NumPy computation.
+\section{Limitations}
+\begin{itemize}
+    \item Derivations aren't focused as it's intuition central.
+    \item No export of curve data.
+    \item 3D input is terminal-based instead of GUI.
+    \item MCQs lacking in exam oriented mastery.
+\end{itemize}
+
+% ==========================================================
+% CHAPTER 5: CONCLUSION AND FUTURE ENHANCEMENT
+% ==========================================================
+\chapter{Conclusion and Future Enhancement}
+\section{Conclusion}
+This project successfully integrates mathematical theory and visualization. It demonstrates how complex transformations and Bézier curves can be implemented interactively using Python.
+The modular structure allows easy extension and experimentation.
+\section{Future Enhancements}
+\begin{itemize}
+    \item Implement Bézier surface patches.
+    \item Add GUI-based 3D control point input.
+    \item Export curve as image or animation.
+    \item Make the questions and interaction more geared towards course oriented mastery
+\end{itemize}
+
+% ==========================================================
+% APPENDIX
+% ==========================================================
+\appendix
+\chapter{Appendices}
+\section{UI Controls}
+\begin{itemize}
+    \item Mouse Click: Add control point
+    \item Key R: Reset
+    \item Key Q: Exit
+\end{itemize}
+% ==========================================================
+% REFERENCES
+% ==========================================================
+\bibliographystyle{ieeetr}
+\bibliography{includes/ref}
+% use \cite{} to cite the part taken as reference
+\cite{mathworld_complex}
+\cite{farin_bezier}
+\cite{class_notes}
+\end{document}
